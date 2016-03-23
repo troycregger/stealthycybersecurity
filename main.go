@@ -27,6 +27,7 @@ func serveWeb() {
 	http.HandleFunc("/img/", serveResource)
 	http.HandleFunc("/css/", serveResource)
 	http.HandleFunc("/js/", serveResource)
+	http.HandleFunc("/fonts/", serveResource)
 
 	http.Handle("/", gorillaRoute)
 	http.ListenAndServe(":8080", nil)
@@ -80,6 +81,16 @@ func serveResource(w http.ResponseWriter, req *http.Request) {
 		contentType = "image/jpg; charset=utf-8"
 	} else if strings.HasSuffix(path, ".js") {
 		contentType = "application/javascript; charset=utf-8"
+	} else if strings.HasSuffix(path, ".ttf") {
+		contentType = "application/x-font-ttf; charset=utf-8"
+	} else if strings.HasSuffix(path, ".svg") {
+		contentType = "image/svg+xml; charset=utf-8"
+	} else if strings.HasSuffix(path, ".woff") {
+		contentType = "application/font-woff; charset=utf-8"
+	} else if strings.HasSuffix(path, ".woff2") {
+		contentType = "application/font-woff2; charset=utf-8"
+	} else if strings.HasSuffix(path, ".eot") {
+		contentType = "application/vnd.ms-fontobject; charset=utf-8"
 	} else {
 		contentType = "text/plain; charset=utf-8"
 	}
