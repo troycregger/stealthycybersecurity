@@ -1,0 +1,15 @@
+<VirtualHost *:80>
+    ServerAdmin cfernandez@linux.com
+    ServerName stealthy-cybersecurity.com
+    ServerAlias www.stealthy-cybersecurity.com
+
+    ProxyPreserveHost On
+    ProxyPass / http://0.0.0.0:8080/
+    ProxyPassReverse / http://0.0.0.0:8080/
+
+    <Directory />
+        Options FollowSymLinks
+        AllowOverride None
+   </Directory>
+</VirtualHost>
+
