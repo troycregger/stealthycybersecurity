@@ -65,6 +65,17 @@ func populateStaticPages() *template.Template {
 		log.Println(pathInfo.Name())
 		*templatePaths = append(*templatePaths, basePath+"/"+pathInfo.Name())
 	}
+
+	basePath = "themes/" + themeName
+	templateFolder, _ = os.Open(basePath)
+	defer templateFolder.Close()
+	templatePathsRaw, _ = templateFolder.Readdir(-1)
+
+	for _, pathInfo := range templatePathsRaw {
+		log.Println(pathInfo.Name())
+		*templatePaths = append(*templatePaths, basePath+"/"+pathInfo.Name())
+	}
+
 	result.ParseFiles(*templatePaths...)
 	return result
 }
